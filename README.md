@@ -1,106 +1,92 @@
-# 🚀 NXP Teleport Menu
+# NXP MLO Teleport Menu
 
-A modular and visually engaging teleportation menu system for FiveM using NUI. Designed and developed by **Legacy DEV Team**, this system allows players to teleport to predefined locations organized by categories. Each location supports blips, ground markers, and a cinematic camera transition before the player is placed.
+A modular and cinematic teleportation system for **FiveM**, developed by **Legacy DEV Team**. This system enables players to teleport to categorized map locations with visual previews, blips, ground markers, and optional ACE permission control.
 
 ---
 
-## 🧩 Features
+## 🚀 Features
 
-- 🗂 **Category-Based Location Sorting**
-- 🎥 **Cinematic Camera Preview** (5s fly-in before teleport)
-- 📍 **Map Blips & Ground Markers**
-- 🔐 **Optional ACE Permission Support**
-- 📄 **Load Locations from `locations.lua`**
-- 🔄 **Configurable Caching Mechanism**
-- 💻 **NUI Interface with Search and Preview**
-- ⚡ **Supports teleporting players or vehicles**
+- ✅ **Cinematic Camera Preview** before teleportation
+- ✅ **Category-based sorting** of teleport locations
+- ✅ **Custom map blips** and ground markers
+- ✅ **ACE permission support** (toggleable)
+- ✅ **Fully modular config & UI**
+- ✅ **NUI Menu with Live Location List**
 
 ---
 
 ## ⚙️ Configuration
 
-### `config.lua`
+### shared/config.lua
+
+- `EnableBlips`: Enables map blips for each location
+- `EnableMarkers`: Shows ground markers at destination
+- `EnableCinematicPreview`: Enables camera fly-in
+- `PreviewDuration`: Duration in seconds of the preview
+- `UsePermissions`: Use ACE-based access control
+- `BlockTeleportInVehicle`: Prevents teleporting in vehicles
+
+### shared/locations.lua
+
+Locations are grouped by category, each with:
+
 ```lua
-Config = {}
-Config.UseAcePerms = false         -- Enable ACE-based permission filtering
-Config.CacheDuration = 300         -- Time in seconds to cache locations server-side
+{
+    name = "Location Name",
+    coords = vector3(x, y, z),
+    heading = 0.0,
+    blip = {
+        enabled = true,
+        sprite = 60,
+        color = 38,
+        scale = 0.8
+    },
+    marker = true,
+    permission = "teleport.group" -- or false for no check
+}
 ````
 
-### `locations.lua`
+---
 
-Locations are defined in categories:
+## 🧠 Permissions (Optional)
 
-```lua
-Config.Locations = {
-    {
-        name = "Police Stations",
-        ace_perm = nil,
-        locations = {
-            {
-                name = "U.S Marshal HQ",
-                desc = "Lobby, Garage, Cells, Offices, etc.",
-                coords = {
-                    spawn = { x = -835.25, y = -694.38, z = 27.31, w = 268.05 },
-                    marker = { x = -835.25, y = -694.38, z = 27.31 },
-                    blip   = { x = -835.25, y = -694.38, z = 27.31 },
-                    camera = { x = -835.25, y = -694.38, z = 27.31 }
-                },
-                icon = "fa-building-shield",
-                ace_perm = nil
-            },
-            -- More locations...
-        }
-    },
-    -- More categories...
-}
+If `UsePermissions = true`, add ACE entries like:
+
+```plaintext
+add_ace group.admin teleport.police allow
+add_ace group.ems teleport.ems allow
 ```
 
 ---
 
-## 🔐 ACE Permissions
+## 🖥️ Usage
 
-If `Config.UseAcePerms = true`, the following permissions are available:
+### Open Menu via Event:
 
-| Permission         | Description                            |
-| ------------------ | -------------------------------------- |
-| `teleport.use`     | Allow a player to use the teleport UI  |
-| `teleport.refresh` | Allow a player to run `/rtp` command   |
-| `category.name`    | Define access per category or location |
+```lua
+TriggerEvent("nxp-teleport:openMenu")
+```
 
----
-
-## 🖥️ Commands
-
-| Command   | Description                       |
-| --------- | --------------------------------- |
-| `/tpmenu` | Opens the teleport UI (or use F4) |
-| `/rtp`    | Reloads and resets location cache |
+You may bind this to a command or radial menu item.
 
 ---
 
-## 🛠️ Integration Notes
+## 🧪 Development Notes
 
-* Built with full support for **ox\_lib** notifications and keybinds.
-* Markers use `nxpicon` texture dictionary – ensure you include it or modify the `DrawMarker` fallback.
-* Camera and marker preview automatically handled based on `locations.lua`.
-
----
-
-## ✅ Dependencies
-
-* [ox\_lib](https://github.com/overextended/ox_lib) (for UI notifications)
-* jQuery + Font Awesome (via CDN, used in `index.html`)
+* Built with **Lua 5.4** and **HTML/CSS/JS** (no dependencies).
+* Works with or without `ox_lib` and `oxmysql` (optional logging ready).
+* Future-proofed structure with room for DB-driven locations.
 
 ---
 
 ## 📜 License
 
-MIT License
-© 2025 Legacy DEV Team
+Licensed under the [MIT License](LICENSE). Attribution not required, but appreciated.
 
 ---
 
-## 👥 Credits
+## 🛠 Credits
 
-Developed by **Legacy DEV Team**
-Special thanks to the FiveM & open-source communities.
+* Core Development: **Legacy DEV Team**
+* Cinematic System Concept: Inspired by GTA V's mission fly-ins
+* UI Framework: Vanilla HTML/CSS/JS (Tailwind-ready)

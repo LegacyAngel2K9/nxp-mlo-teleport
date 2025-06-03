@@ -1,0 +1,75 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: rgba(0, 0, 0, 0.6);
+    font-family: Arial, sans-serif;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#app {
+    width: 600px;
+}
+
+.menu {
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
+}
+
+.menu h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#locations {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.category {
+    background-color: #2c2c2c;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.category h2 {
+    margin: 0 0 8px;
+}
+
+.category button {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    margin: 3px 0;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+}
+
+.category button:hover {
+    background-color: #0056b3;
+}
+
+button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    background-color: crimson;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: darkred;
+}

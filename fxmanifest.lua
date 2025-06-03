@@ -2,30 +2,31 @@ fx_version 'cerulean'
 game 'gta5'
 
 author 'Legacy DEV Team'
-description 'Teleport Service for NXP'
-version '1.0.0'
-lua54 'yes'
+description 'NXP Teleport Menu System'
+version '2.0.0'
 
-ui_page 'html/index.html'
+lua54 'yes'
 
 shared_scripts {
     '@ox_lib/init.lua',
-    'config.lua'
+    'shared/config.lua',
+    'shared/locations.lua'
 }
 
 client_scripts {
-    'client/client.lua'
+    'client/camera.lua',
+    'client/main.lua'
 }
 
 server_scripts {
-    'server/server.lua'
+    '@oxmysql/lib/MySQL.lua',
+    'server/main.lua'
 }
 
 files {
     'html/index.html',
-    'html/js/script.js',
-    'html/css/style.css'
+    'html/style.css',
+    'html/script.js'
 }
 
-data_file "PED_METADATA_FILE" "ped.xml"
-file "ped.xml"
+ui_page 'html/index.html'
