@@ -13,7 +13,7 @@ Config.EnableCinematicPreview = true
 Config.PreviewDuration = 5
 
 -- Enable permission checking using ACE or custom logic
-Config.UsePermissions = true
+Config.UsePermissions = false
 
 -- If true, teleport will be cancelled if player is in a vehicle
 Config.BlockTeleportInVehicle = false
