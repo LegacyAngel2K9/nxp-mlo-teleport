@@ -1,92 +1,106 @@
-# NXP MLO Teleport Menu
+# NXP MLO Teleport System
 
-A modular and cinematic teleportation system for **FiveM**, developed by **Legacy DEV Team**. This system enables players to teleport to categorized map locations with visual previews, blips, ground markers, and optional ACE permission control.
-
----
-
-## 🚀 Features
-
-- ✅ **Cinematic Camera Preview** before teleportation
-- ✅ **Category-based sorting** of teleport locations
-- ✅ **Custom map blips** and ground markers
-- ✅ **ACE permission support** (toggleable)
-- ✅ **Fully modular config & UI**
-- ✅ **NUI Menu with Live Location List**
+**NXP MLO Teleport** is a modular and cinematic teleportation menu system for **FiveM**, designed for easy navigation between categorized MLO locations. Built by Legacy DEV Team, this system integrates smooth camera previews, optional ACE permission controls, and a highly customizable NUI menu.
 
 ---
 
-## ⚙️ Configuration
+## ✨ Features
 
-### shared/config.lua
+- 🎯 **Category-based Location Sorting**  
+  Organize teleportation points by department (e.g., Police, Fire, EMS, Misc).
 
-- `EnableBlips`: Enables map blips for each location
-- `EnableMarkers`: Shows ground markers at destination
-- `EnableCinematicPreview`: Enables camera fly-in
-- `PreviewDuration`: Duration in seconds of the preview
-- `UsePermissions`: Use ACE-based access control
-- `BlockTeleportInVehicle`: Prevents teleporting in vehicles
+- 🎥 **Cinematic Camera Preview**  
+  Fly-in camera sequence before teleportation for immersive transitions.
 
-### shared/locations.lua
+- 🗺️ **Map Blips & Ground Markers**  
+  Visual markers at destination (optional per config).
 
-Locations are grouped by category, each with:
+- 🔐 **ACE Permission Support**  
+  Toggleable via config. Assign permission tags to individual locations.
+
+- 🌐 **Responsive NUI Menu**  
+  HTML/CSS/JS interface styled with v1’s original gradient palette.
+
+- 🧠 **Description & Icon Support**  
+  Each location can include a FontAwesome icon and a description tooltip.
+
+---
+
+## ⚙️ Configuration (`config.lua`)
 
 ```lua
-{
-    name = "Location Name",
-    coords = vector3(x, y, z),
-    heading = 0.0,
-    blip = {
-        enabled = true,
-        sprite = 60,
-        color = 38,
-        scale = 0.8
-    },
-    marker = true,
-    permission = "teleport.group" -- or false for no check
-}
+Config.EnableBlips = true              -- Enable map blips
+Config.EnableMarkers = true            -- Enable 3D ground markers
+Config.EnableCinematicPreview = true   -- Enable camera fly-in effect
+Config.PreviewDuration = 5             -- Duration (in seconds) of preview
+Config.UsePermissions = true           -- Enable ACE permission checks
+Config.BlockTeleportInVehicle = false  -- Prevent teleport inside vehicle
 ````
 
 ---
 
-## 🧠 Permissions (Optional)
+## 📍 Location Definition (`locations.lua`)
 
-If `UsePermissions = true`, add ACE entries like:
+Each category (e.g. "Police Stations", "EMS") holds a list of locations.
 
-```plaintext
+Example structure:
+
+```lua
+{
+  name = "Weazel PD",
+  description = "Shooting Range, Labs, Offices and more.",
+  coords = vector3(-602.2, -929.94, 23.86),
+  heading = 268.34,
+  icon = "fa-building-shield",
+  permission = "teleport.police" -- or nil if unrestricted
+}
+```
+
+---
+
+## 🖱️ Client Usage
+
+To open the menu:
+
+```lua
+TriggerEvent("nxp-teleport:openMenu")
+```
+
+Integrate this into a radial menu, command, or keybinding system as desired.
+
+---
+
+## 🛡️ ACE Permissions (if enabled)
+
+You can restrict access to individual locations using ACE permissions.
+
+Example:
+
+```text
 add_ace group.admin teleport.police allow
 add_ace group.ems teleport.ems allow
 ```
 
 ---
 
-## 🖥️ Usage
+## 🧩 Requirements
 
-### Open Menu via Event:
-
-```lua
-TriggerEvent("nxp-teleport:openMenu")
-```
-
-You may bind this to a command or radial menu item.
+* FiveM Server (Lua 5.4)
+* Optional: \[ox\_lib] for better compatibility
+* FontAwesome script kit (included via CDN in HTML)
 
 ---
 
-## 🧪 Development Notes
+## 🛠 Developer Notes
 
-* Built with **Lua 5.4** and **HTML/CSS/JS** (no dependencies).
-* Works with or without `ox_lib` and `oxmysql` (optional logging ready).
-* Future-proofed structure with room for DB-driven locations.
-
----
-
-## 📜 License
-
-Licensed under the [MIT License](LICENSE). Attribution not required, but appreciated.
+* Built with modularity in mind — locations and config files can be extended freely.
+* NUI buttons use `FontAwesome 6` icons, which can be changed per location.
+* Permissions can be dynamically toggled or removed entirely.
 
 ---
 
-## 🛠 Credits
+## 📘 License
 
-* Core Development: **Legacy DEV Team**
-* Cinematic System Concept: Inspired by GTA V's mission fly-ins
-* UI Framework: Vanilla HTML/CSS/JS (Tailwind-ready)
+This project is licensed under the **MIT License**. Use freely, modify openly.
+
+> © 2024-2025 Legacy DEV Team.

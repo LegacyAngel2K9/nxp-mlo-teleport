@@ -21,7 +21,15 @@ function showMenu(locations) {
 
         group.forEach((loc, index) => {
             const button = document.createElement("button");
-            button.textContent = loc.name;
+
+            const icon = document.createElement("i");
+            icon.className = `fa-solid ${loc.icon || "fa-map-pin"}`;
+            button.appendChild(icon);
+
+            const label = document.createElement("span");
+            label.textContent = `${loc.name}`;
+            button.appendChild(label);
+
             button.onclick = () => teleport(category, index);
             section.appendChild(button);
         });
@@ -35,16 +43,13 @@ function showMenu(locations) {
 function teleport(category, index) {
     fetch(`https://${GetParentResourceName()}/teleportTo`, {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ category, index })
     });
 }
 
 function closeMenu() {
     document.getElementById("app").style.display = "none";
-
     fetch(`https://${GetParentResourceName()}/closeMenu`, {
         method: "POST"
     });

@@ -1,24 +1,24 @@
 Config = {}
 
--- Enable or disable blips on the map for teleport locations
+-- Enable/disable map blips for teleport locations
 Config.EnableBlips = true
 
--- Enable or disable ground markers (e.g., 3D markers on destination points)
+-- Enable/disable 3D ground markers
 Config.EnableMarkers = true
 
 -- Enable cinematic camera preview before teleporting
 Config.EnableCinematicPreview = true
 
--- Preview duration in seconds
+-- Duration of cinematic preview (in seconds)
 Config.PreviewDuration = 5
 
--- Enable permission checking using ACE or custom logic
-Config.UsePermissions = false
+-- Require ACE permissions to access specific locations
+Config.UsePermissions = true
 
--- If true, teleport will be cancelled if player is in a vehicle
+-- Prevent teleport if the player is in a vehicle
 Config.BlockTeleportInVehicle = false
 
--- Marker settings
+-- Marker appearance
 Config.Marker = {
     type = 2,
     scale = vector3(0.5, 0.5, 0.5),

@@ -1,5 +1,4 @@
 local selectedLocation = nil
-local nuiReady = false
 
 RegisterNetEvent("nxp-teleport:openMenu", function()
     SetNuiFocus(true, true)
@@ -9,8 +8,8 @@ end)
 RegisterNUICallback("teleportTo", function(data, cb)
     local category = data.category
     local index = data.index
-
     local loc = Locations[category] and Locations[category][index]
+
     if not loc then return cb({ success = false }) end
 
     if Config.UsePermissions and loc.permission then
@@ -45,7 +44,7 @@ function triggerTeleport(loc)
     RequestCollisionAtCoord(loc.coords.x, loc.coords.y, loc.coords.z)
     SetEntityCoords(PlayerPedId(), loc.coords.x, loc.coords.y, loc.coords.z, false, false, false, true)
     SetEntityHeading(PlayerPedId(), loc.heading or 0.0)
-    Wait(100)
 
+    Wait(500)
     DoScreenFadeIn(800)
 end

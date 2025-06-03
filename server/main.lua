@@ -7,7 +7,8 @@ RegisterNetEvent("nxp-teleport:requestTeleport", function(category, index)
         if IsPlayerAceAllowed(src, loc.permission) then
             TriggerClientEvent("nxp-teleport:doTeleport", src, loc)
         else
-            print(("[NXP-TELEPORT] Player %s tried to teleport without permission '%s'"):format(src, loc.permission))
+            print(("[NXP-TELEPORT] Player %s tried to access '%s' without permission '%s'")
+                :format(GetPlayerName(src), loc.name, loc.permission))
         end
     else
         TriggerClientEvent("nxp-teleport:doTeleport", src, loc)
